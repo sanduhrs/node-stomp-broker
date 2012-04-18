@@ -6,13 +6,15 @@ var StompFrame = require('./frame').StompFrame;
 var StompFrameEmitter = require('./parser').StompFrameEmitter;
 
 var StompClientCommands = [
+    'STOMP',
     'CONNECT',
     'SEND',
     'SUBSCRIBE',
     'UNSUBSCRIBE',
+    'ACK',
+    'NACK',
     'BEGIN',
     'COMMIT',
-    'ACK',
     'ABORT',
     'DISCONNECT',
 ];
@@ -127,6 +129,7 @@ function StompStreamHandler(stream, queueManager) {
         }
         try {
             switch (frame.command) {
+                case 'STOMP':
                 case 'CONNECT':
                     // TODO: Actual authentication
                     authenticated = true;
