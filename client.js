@@ -1,6 +1,6 @@
 var net = require('net');
 var fs = require('fs');
-var sys = require('sys');
+var util = require('util');
 var events = require('events');
 var crypto = require('crypto');
 var StompFrame = require('./frame').StompFrame;
@@ -25,7 +25,7 @@ function StompClient(address, port, user, pass) {
     });
 };
 
-sys.inherits(StompClient, events.EventEmitter);
+util.inherits(StompClient, events.EventEmitter);
 
 StompClient.prototype.onConnect = function() {
     var self = this;
@@ -106,7 +106,7 @@ function SecureStompClient(address, port, user, pass, credentials) {
     });
 };
 
-sys.inherits(SecureStompClient, StompClient);
+util.inherits(SecureStompClient, StompClient);
 
 exports.StompClient = StompClient;
 exports.SecureStompClient = SecureStompClient;
