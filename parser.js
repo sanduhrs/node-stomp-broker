@@ -1,4 +1,4 @@
-var sys = require('sys');
+var util = require('util');
 var events = require('events');
 var StompFrame = require('./frame').StompFrame;
 
@@ -18,7 +18,7 @@ function StompFrameEmitter(commands) {
     this.commands = commands;
 };
 
-sys.inherits(StompFrameEmitter, events.EventEmitter);
+util.inherits(StompFrameEmitter, events.EventEmitter);
 
 StompFrameEmitter.prototype.incrementState = function() {
     if (this.state == ParserStates.BODY || this.state == ParserStates.ERROR){
