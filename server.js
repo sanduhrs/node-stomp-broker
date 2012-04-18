@@ -5,15 +5,6 @@ var crypto = require('crypto');
 var StompFrame = require('./frame').StompFrame;
 var StompFrameEmitter = require('./parser').StompFrameEmitter;
 
-var privateKey = fs.readFileSync('CA/newkeyopen.pem', 'ascii');
-var certificate = fs.readFileSync('CA/newcert.pem', 'ascii');
-var certificateAuthority = fs.readFileSync('CA/demoCA/private/cakey.pem', 'ascii');
-var credentials = crypto.createCredentials({
-    key: privateKey,
-    cert: certificate,
-    ca: certificateAuthority,
-});
-
 var StompClientCommands = [
     'CONNECT',
     'SEND',
@@ -245,5 +236,5 @@ StompServer.prototype.stop = function(port) {
     this.server.close();
 };
 
-new SecureStompServer(8124, credentials).listen();
-new StompServer(8125).listen();
+exports.StompServer = StompServer;
+exports.SecureStompServer = SecureStompServer;
